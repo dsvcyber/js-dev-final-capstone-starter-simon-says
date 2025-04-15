@@ -332,7 +332,14 @@ function checkPress(color) {
  */
 
 function checkRound() {
-  // TODO: Write your code here.
+  if (playerSequence.length === maxRoundCount) {
+    resetGame("Nice! You won!");
+  } else {
+    roundCount++;
+    playerSequence = [];
+    setText(statusSpan, "Nice! Keep going!");
+    setTimeout(() => playComputerTurn(), 1000);
+  }
 }
 
 /**
@@ -345,14 +352,14 @@ function checkRound() {
  * 3. Reset `roundCount` to an empty array
  */
 function resetGame(text) {
-  // TODO: Write your code here.
-
-  // Uncomment the code below:
-  // alert(text);
-  // setText(heading, "Simon Says");
-  // startButton.classList.remove("hidden");
-  // statusSpan.classList.add("hidden");
-  // padContainer.classList.add("unclickable");
+  computerSequence = [];
+  playerSequence = [];
+  roundCount = 0;
+  alert(text);
+  setText(heading, "Simon Says");
+  startButton.classList.remove("hidden");
+  statusSpan.classList.add("hidden");
+  padContainer.classList.add("unclickable");
 }
 
 /**
