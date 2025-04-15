@@ -259,7 +259,7 @@ function activatePads(sequence) {
  * to the current round (roundCount) multiplied by 600ms which is the duration for each pad in the
  * sequence.
  */
- function playComputerTurn() {
+function playComputerTurn() {
   padContainer.classList.add("unclickable");
   setText(statusSpan, "The computer's turn...");
   setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
@@ -276,7 +276,8 @@ function activatePads(sequence) {
  * 2. Display a status message showing the player how many presses are left in the round
  */
 function playHumanTurn() {
-  // TODO: Write your code here.
+  padContainer.classList.remove("unclickable");
+  setText(statusSpan, `Press the ${maxRoundCount - roundCount} button${maxRoundCount - roundCount === 1 ? '' : 's'} left`);
 }
 
 /**
@@ -302,7 +303,17 @@ function playHumanTurn() {
  *
  */
 function checkPress(color) {
-  // TODO: Write your code here.
+  playerSequence.push(color);
+  const index = playerSequence.length - 1;
+  const remainingPresses = computerSequence.length - playerSequence.length;
+  setText(statusSpan, `Press the ${remainingPresses} button${remainingPresses === 1 ? '' : 's'} left`);
+  if (computerSequence[index] !== color) {
+    resetGame("Oops! Wrong button. Try again.");
+    return;
+  }
+  if (remainingPresses === 0) {
+    checkRound();
+  }
 }
 
 /**
