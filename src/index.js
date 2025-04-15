@@ -3,9 +3,9 @@
  */
 
  const startButton = document.querySelector(".js-start-button");
- const statusSpan; // Use querySelector() to get the status element
- const heading; // Use querySelector() to get the heading element
- const padContainer; // Use querySelector() to get the heading element
+ const statusSpan = document.querySelector(".js-status"); // Use querySelector() to get the status element
+ const heading = document.querySelector("h1"); // Use querySelector() to get the heading element
+ const padContainer = document.querySelector(".js-pad-container"); // Use querySelector() to get the heading element
 
 /**
  * VARIABLES
@@ -277,7 +277,8 @@ function playComputerTurn() {
  */
 function playHumanTurn() {
   padContainer.classList.remove("unclickable");
-  setText(statusSpan, `Press the ${maxRoundCount - roundCount} button${maxRoundCount - roundCount === 1 ? '' : 's'} left`);
+  //displays how many rounds are left and removes the 's' once down to 1 round
+  setText(statusSpan, `${maxRoundCount - roundCount} Round${maxRoundCount - roundCount === 1 ? '' : 's'} left`);
 }
 
 /**
@@ -306,7 +307,8 @@ function checkPress(color) {
   playerSequence.push(color);
   const index = playerSequence.length - 1;
   const remainingPresses = computerSequence.length - playerSequence.length;
-  setText(statusSpan, `Press the ${remainingPresses} button${remainingPresses === 1 ? '' : 's'} left`);
+  //displays remaining button presses after the first button is pressed by the player on their turn
+  setText(statusSpan, `${remainingPresses} button${remainingPresses === 1 ? '' : 's'} left`);
   if (computerSequence[index] !== color) {
     resetGame("Oops! Wrong button. Try again.");
     return;
