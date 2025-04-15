@@ -58,7 +58,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
  */
 
 padContainer.addEventListener("click", padHandler);
-// TODO: Add an event listener `startButtonHandler()` to startButton.
+startButton.addEventListener("click", startButtonHandler);
 
 /**
  * EVENT HANDLERS
@@ -79,7 +79,26 @@ padContainer.addEventListener("click", padHandler);
  *
  */
 function startButtonHandler() {
-  // TODO: Write your code here.
+  const level = prompt("Choose a skill level (1-4):");
+  const parsedLevel = parseInt(level);
+  
+  // If user input is invalid (not 1-4) AND if it's not null or undefined, show error and reset
+  if (!isNaN(parsedLevel) && (parsedLevel < 1 || parsedLevel > 4)) {
+    alert("Please enter level 1, 2, 3, or 4");
+    return;
+  }
+  
+  // If user input is blank or NaN, use level 1
+  if (isNaN(parsedLevel)) {
+    maxRoundCount = 8; // Default for level 1
+  } else {
+    maxRoundCount = setLevel(parsedLevel);
+  }
+  
+  roundCount++; //increments round
+  startButton.classList.add("hidden"); //hides the start button
+  statusSpan.classList.remove("hidden");
+  playComputerTurn();
 
   return { startButton, statusSpan };
 }
@@ -105,7 +124,9 @@ function padHandler(event) {
   const { color } = event.target.dataset;
   if (!color) return;
 
-  // TODO: Write your code here.
+  const pad = pads.find(pad => pad.color === color);
+  pad.sound.play();
+  checkPress(color);
   return color;
 }
 
@@ -134,8 +155,17 @@ function padHandler(event) {
  * setLevel(8) //> returns "Please enter level 1, 2, 3, or 4";
  *
  */
-function setLevel(level = 1) {
-  // TODO: Write your code here.
+function setLevel(level) {
+  // If level is undefined or null, default to level 1
+  if (level === undefined || level === null) {
+    return 8; // Default for level 1
+  }
+  
+  if (level < 1 || level > 4) {
+    return "Please enter level 1, 2, 3, or 4";
+  }
+  
+  return level * 6 + 2;
 }
 
 /**
@@ -154,17 +184,16 @@ function setLevel(level = 1) {
  * getRandomItem([1, 2, 3, 4]) //> returns 1
  */
 function getRandomItem(collection) {
-  // if (collection.length === 0) return null;
-  // const randomIndex = Math.floor(Math.random() * collection.length);
-  // return collection[randomIndex];
+  if (collection.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * collection.length);
+  return collection[randomIndex];
 }
 
 /**
  * Sets the status text of a given HTML element with a given a message
  */
 function setText(element, text) {
-  // TODO: Write your code here.
-  return element;
+  return element.textContent = text;
 }
 
 /**
@@ -181,7 +210,10 @@ function setText(element, text) {
  */
 
 function activatePad(color) {
-  // TODO: Write your code here.
+  const pad = pads.find(pad => pad.color === color);
+  pad.selector.classList.add("activated");
+  pad.sound.play();
+  setTimeout(() => pad.selector.classList.remove("activated"), 500);
 }
 
 /**
@@ -199,7 +231,9 @@ function activatePad(color) {
  */
 
 function activatePads(sequence) {
-  // TODO: Write your code here.
+  sequence.forEach((color, index) => {
+    setTimeout(() => activatePad(color), index * 600);
+  });
 }
 
 /**
@@ -226,9 +260,12 @@ function activatePads(sequence) {
  * sequence.
  */
  function playComputerTurn() {
-  // TODO: Write your code here.
-
-  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000); // 5
+  padContainer.classList.add("unclickable");
+  setText(statusSpan, "The computer's turn...");
+  setText(heading, `Round ${roundCount} of ${maxRoundCount}`);
+  computerSequence.push(getRandomItem(pads).color);
+  activatePads(computerSequence);
+  setTimeout(() => playHumanTurn(roundCount), roundCount * 600 + 1000);
 }
 
 /**
