@@ -56,7 +56,10 @@ let roundCount = 0; // track the number of rounds that have been played so far
 /**
  * EVENT LISTENERS
  */
-
+window.addEventListener("DOMContentLoaded", () => {
+  const audio = document.getElementById("bg-music");
+  audio.volume = 0.015; // Set volume of background music to 1.5%
+});
 padContainer.addEventListener("click", padHandler);
 startButton.addEventListener("click", startButtonHandler);
 

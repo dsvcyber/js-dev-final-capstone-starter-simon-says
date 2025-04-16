@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Microbe&display=swap');
 
 html {
-  background: url('../assets/background.png') no-repeat center center fixed;
+  background: url('../assets/tango.png') repeat center center fixed;
   box-sizing: border-box;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  background-size: cover;
+  background-size: 30%;
   overflow: hidden;
 }
 
@@ -20,13 +20,13 @@ body {
 }
 
 main {
-  background-color: #000;
+  background-color: rgba(0,0,0,0.0);
   padding: 40px;
 }
 
 h1 {
   text-align: center;
-  font-size: 40px;
+  font-size: 60px;
 }
 
 .game-controls {
@@ -35,15 +35,17 @@ h1 {
 
 .start-button {
   display: inline-block;
-  height: 38px;
+  height: 45px;
   padding: 0 30px;
   color: yellow;
+  font-family: cursive;
   text-align: center;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 600;
   text-transform: uppercase;
   background-color: transparent;
-  border: 3px solid yellow;
+  border: 5px solid yellow;
+  border-radius: 18px;
   cursor: pointer;
 }
 
@@ -51,7 +53,7 @@ h1 {
   color: greenyellow;
   font-size: 18px;
   border-color: greenyellow;
-  transform: rotate(3deg);
+  transform: rotate(5deg);
 }
 
 .status {
@@ -68,70 +70,78 @@ h1 {
 
 .pad-red {
   border-top-left-radius: 200px;
-  background-color: red;
+  background-color:#ff00aa;
 }
 
 .pad-red:hover,
 .pad-red:focus {
-  background-color: #ff451a;
-  transform: rotate(-5deg);
+  background-color: #ff006a;
+  /*transform: rotate(-5deg); */
+  scale: 90%;
 }
 
 .pad-red:active,
 .pad-red.activated {
-  background-color: #ff5c36;
-  transform: translateY(10px);
+  background-color: #ff0015;
+  transform: translateY(-10px) translateX(-10px);
+  scale: 100%;
 }
 
 .pad-green {
   border-top-right-radius: 200px;
-  background-color: green;
+  background-color: #aaff00;
 }
 
 .pad-green:hover,
 .pad-green:focus {
-  background-color: #8cc218;
-  transform: rotate(5deg);
+  background-color: #0bff05;
+  /*transform: rotate(5deg); */
+  scale: 90%;
 }
 
 .pad-green:active,
 .pad-green.activated {
-  background-color: #a0ea00;
-  transform: translateY(10px);
+  background-color: #0bff05;
+  transform: translateY(-10px) translateX(10px);
+  scale: 100%;
 }
 
 .pad-yellow {
   border-bottom-right-radius: 200px;
-  background-color: yellow;
+  background-color: 	#fdfe02;
 }
 
 .pad-yellow:hover,
 .pad-yellow:focus {
-  background-color: #ffb900;
-  transform: rotate(5deg);
+  background-color: #feed02;
+  /*transform: rotate(5deg); */
+  scale: 90%;
 }
 
 .pad-yellow:active,
 .pad-yellow.activated {
-  background-color: #ffca3d;
-  transform: translateY(10px);
+  background-color: #fed802;
+  transform: translateY(10px) translateX(10px);
+  scale: 100%;
 }
 
 .pad-blue {
   border-bottom-left-radius: 200px;
-  background-color: blue;
+  background-color: 	#00aaff;
 }
 
 .pad-blue:hover,
 .pad-blue:focus {
-  background-color: #139ddd;
-  transform: rotate(5deg);
+  background-color: #0077ff;
+  /*transform: rotate(5deg); */
+  scale: 90%;
 }
 
 .pad-blue:active,
 .pad-blue.activated {
-  background-color: #2bbcff;
-  transform: translateY(10px);
+  background-color: #0051ff;
+  transform: translateY(10px) translateX(-10px);
+  scale: 100%;
 }
 
 .hidden {
