@@ -57,7 +57,11 @@ h1 {
 }
 
 .status {
-  font-size: 22px;
+  opacity: .8;
+  font-family: 'Rubik Microbe', sans-serif;
+  font-size: 30px;
+  color: yellow;
+  font-weight: bold;
 }
 
 .pad-container {

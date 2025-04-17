@@ -56,6 +56,7 @@ let roundCount = 0; // track the number of rounds that have been played so far
 /**
  * EVENT LISTENERS
  */
+//Event listener that activates background music to start playing once page loads
 window.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("bg-music");
   audio.volume = 0.015; // Set volume of background music to 1.5%
@@ -311,9 +312,9 @@ function checkPress(color) {
   const index = playerSequence.length - 1;
   const remainingPresses = computerSequence.length - playerSequence.length;
   //displays remaining button presses after the first button is pressed by the player on their turn
-  setText(statusSpan, `${remainingPresses} button${remainingPresses === 1 ? '' : 's'} left`);
+  setText(statusSpan, `${remainingPresses} dance step${remainingPresses === 1 ? '' : 's'} left`);
   if (computerSequence[index] !== color) {
-    resetGame("Oops! Wrong button. Try again.");
+    resetGame("Oops! You stomped on your partner's toes. Try again.");
     return;
   }
   if (remainingPresses === 0) {
@@ -338,11 +339,11 @@ function checkPress(color) {
 
 function checkRound() {
   if (playerSequence.length === maxRoundCount) {
-    resetGame("Nice! You won!");
+    resetGame("Congratulations! You completed the full Tango!");
   } else {
     roundCount++;
     playerSequence = [];
-    setText(statusSpan, "Nice! Keep going!");
+    setText(statusSpan, "Nice! Keep dancing!");
     setTimeout(() => playComputerTurn(), 1000);
   }
 }
@@ -361,7 +362,7 @@ function resetGame(text) {
   playerSequence = [];
   roundCount = 0;
   alert(text);
-  setText(heading, "Simon Says");
+  setText(heading, "Color Tango");
   startButton.classList.remove("hidden");
   statusSpan.classList.add("hidden");
   padContainer.classList.add("unclickable");
